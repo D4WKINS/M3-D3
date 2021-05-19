@@ -17,7 +17,7 @@ return imgUrlsArr
 }
 
 const loadImages1 = () =>{
-    let targets = [...$('.card svg')]
+    let targets = [...$('.card svg')].length > 0 ? [...$('.card svg')] : [...$('.card img')]
     getImages("laptops").then(
         ( imgUrlsArr ) =>{
             imgUrlsArr.forEach(
@@ -33,11 +33,30 @@ const loadImages1 = () =>{
         }
     )
 }
+const loadImages2 = () =>{
+        let targets = [...$('.card svg')].length > 0 ? [...$('.card svg')] : [...$('.card img')]
+        getImages("phones").then(
+            ( imgUrlsArr ) =>{
+                imgUrlsArr.forEach(
+                    ( el , i ,arr) =>{
+                        let imgNode = document.createElement('img');
+                        imgNode.setAttribute("src", el )
+                        try {
+                            targets[i].outerHTML = imgNode.outerHTML
+                        }catch (e) {}
+                    }
+                )
+
+            }
+        )
+    }
 
 //Dom elements
-let loadImagesBtn = $('main .btn')[0]
+let btns = $('main .btn')
+let loadImages1Btn = btns[0]
+let loadImages2Btn = btns[1]
 
 // function assignments
-loadImagesBtn.addEventListener( 'click', loadImages1 )
-
+loadImages1Btn.addEventListener( 'click', loadImages1 )
+loadImages2Btn.addEventListener( 'click', loadImages2 )
 }
