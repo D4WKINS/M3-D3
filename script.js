@@ -51,6 +51,15 @@ const loadImages2 = () =>{
         )
     }
 
+//EX 3
+    //3) When the user clicks on the "VIEW" button inside the Card, open the specified image in a modal view
+    // a function that remove img from  .modal-body add an img with url passed as arg
+    // we need to select all cards-btn
+    // append to onclick properties a closure containing our modalImg func,
+    // parametrized with url of buttons' cointaining card
+    // we need to activate the modal appending "show" class to modal element
+
+
 //Dom elements
 let btns = $('main .btn')
 let loadImages1Btn = btns[0]
