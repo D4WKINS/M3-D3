@@ -3,18 +3,21 @@
 
 window.onload = ()=> {
 //init
-
 //functions
 const getImages = async ( query) =>{
 let data = {}
 await fetch("http://www.splashbase.co/api/v1/images/search?query=" + query )
     .then( res =>  res.json() )
     .then( parsed => data = parsed)
-
     let imgUrlsArr = []
     data.images.forEach(  el => imgUrlsArr.push(el.url) )
-    console.log( imgUrlsArr )
+    // console.log( imgUrlsArr )
 return imgUrlsArr
+}
+
+const insertImgId = () =>{
+    const str = document.querySelectorAll('.card-body div small')
+
 }
 
 const loadImages1 = () =>{
@@ -36,7 +39,7 @@ const loadImages1 = () =>{
 }
 const loadImages2 = () =>{
         let targets = [...$('.card svg')].length > 0 ? [...$('.card svg')] : [...$('.card img')]
-        getImages("phones").then(
+        getImages("trees").then(
             ( imgUrlsArr ) =>{
                 imgUrlsArr.forEach(
                     ( el , i ,arr) =>{
@@ -51,6 +54,20 @@ const loadImages2 = () =>{
             }
         )
     }
+
+
+   const hideBtn =()=>{
+        const editBtn = document.querySelectorAll('.card-body button:nth-child(2)')
+        const cards = document.querySelectorAll(".col-md-4 .card")
+        for(let i = 0; i < editBtn.length;i++){
+            editBtn[i].innerText="Hide"
+            editBtn[i].addEventListener("click",()=>{
+                cards[i].style.visibility ="hidden"
+            })
+        }
+    }
+
+
 //EX 3
     //3) When the user clicks on the "VIEW" button inside the Card, open the specified image in a modal view
     // a function that remove img from  .modal-body add an img with url passed as arg
@@ -59,16 +76,8 @@ const loadImages2 = () =>{
     // parametrized with url of buttons' cointaining card
     // we need to activate the modal appending "show" class to modal element
 
-    function hideBtn(){
-        const editBtn = document.querySelectorAll('.card-body button:nth-child(2)')
-        const cards = document.querySelectorAll(".col-md-4 .card")
-        for(let i = 0; i<editBtn.length;i++){
-            editBtn[i].innerText="Hide"
-            editBtn[i].addEventListener("click",()=>{
-                cards[i].style.visibility ="hidden"
-            })
-        }
-    }
+
+
 //Dom elements
 let btns = $('main .btn')
 let loadImages1Btn = btns[0]
@@ -79,4 +88,5 @@ let loadImages2Btn = btns[1]
 loadImages1Btn.addEventListener( 'click', loadImages1 )
 loadImages2Btn.addEventListener( 'click', loadImages2 )
 hideBtn()
+// insertImgId()
 }
